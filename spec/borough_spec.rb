@@ -8,6 +8,11 @@ RSpec.describe Borough do
     expect(borough.infected_population).to eq 6
   end
 
+  it 'raises an error if new infections greater than healthy population' do
+    borough = Borough.new(population: 100, name: "Hackney", infected_population: 99, neighbours: [])
+    expect { borough.change_number_of_infected(5) }.to raise_error "Change in infections exceeds healthy population"
+  end
+
   it 'can be converted into json' do
     borough = Borough.new(population: 100, name: "Hackney", infected_population: 1, neighbours: ['Islington'])
     json_body = JSON.parse(borough.to_json)

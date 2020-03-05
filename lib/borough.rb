@@ -10,6 +10,8 @@ class Borough
   end
 
   def change_number_of_infected(change)
+    raise "Change in infections exceeds healthy population" if change > healthy_population
+
     @infected_population += change
   end
 
@@ -18,5 +20,9 @@ class Borough
       name: name,
       infected_population:  infected_population,
       neighbours:  neighbours }.to_json
+  end
+
+  def healthy_population
+    population - infected_population
   end
 end
