@@ -13,6 +13,7 @@ MQTT::Client.connect(MQTT_HOST) do |c|
   c.get('uservicehack/time') do |topic,message|
     boroughs.each do |borough|
       c.publish('uservicehack/borough', borough.to_json)
+      sleep 1
     end
   end
 end
