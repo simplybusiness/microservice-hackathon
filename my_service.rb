@@ -18,10 +18,20 @@ boroughs = [
 MQTT::Client.connect(MQTT_HOST) do |c|
   # If you pass a block to the get method, then it will loop
   # The '#' wildcard subscribes to all topics below this one
-  c.get('uservicehack/time') do |topic,message|
-    boroughs.each do |borough|
-      c.publish('uservicehack/borough', borough.to_json)
-      sleep 1
+
+  threads = []
+  threads << Thread.new {
+    c.get('uservicehack/time') do |topic,message|
+      boroughs.each do |borough|
+        c.publish('uservicehack/borough', borough.to_json)
+        sleep 1
+      end
     end
-  end
+  }
+  threads << Thread.new {
+    c.get('uservicehack/infection') do |topic,message|
+      puts message
+    end
+  }
+  threads.each(&:join)
 end
