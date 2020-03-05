@@ -6,10 +6,12 @@
   "dependencies": {
     "mqtt": "3.x"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^25.1.0"
+  },
   "scripts": {
     "start": "node my_service.js",
-    "test": "mocha"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
