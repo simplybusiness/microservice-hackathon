@@ -1,6 +1,9 @@
-# Microservice Hackathon
+# uService Hackathon Ruby boilerplate
 
-Included herein are some boilerplate code for the London Code Dojo Microservice Hackathon event using a variety of languages, feel free to add your own. PRs gratefully accepted.
+Included here are two small files, the first of which `my_service.rb` that implements a service that loops forever listening for messages, that can be run with:
 
-# LICENSE
-See LICENSE file - MIT.
+> $ ruby my_service.rb
+
+and `publish.rb` that publishes a single message to the channel 'uservicehack/kittens', that can be run with:
+
+> $ ruby publish.rb
