@@ -14,3 +14,4 @@ MQTT::Client.connect(MQTT_HOST) do |c|
     c.publish('uservicehack/mutation', {infection_rate: 22}.to_json)
   end
 end
+
