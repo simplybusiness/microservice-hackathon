@@ -1,12 +1,4 @@
-require 'date'
-
-def infection_rate_algorithm(current_rate, date)
-  if date.friday?
-    current_rate + 1
-  else
-    current_rate
-  end
-end
+require_relative '../../ruby/infection_rate_algorithm'
 
 describe "Mutation Algorithm" do
   context "Given the current infection rate is 1 and the date is a Friday" do
