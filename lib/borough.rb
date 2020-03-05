@@ -9,7 +9,7 @@ class Borough
     @neighbours = neighbours
   end
 
-  def change_in_infected(change)
+  def change_number_of_infected(change)
     @infected_population += change
   end
 
