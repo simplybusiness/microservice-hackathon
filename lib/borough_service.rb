@@ -1,4 +1,7 @@
 class BoroughService
+
+  attr_reader :boroughs
+
   def initialize(boroughs)
     @boroughs = boroughs
   end
