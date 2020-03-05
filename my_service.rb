@@ -7,12 +7,12 @@ SERVICE_NAME = 'borough'
 MQTT_HOST = 'mqtt.fluux.io'
 
 boroughs = [
-    Borough.new(name: "Camden", population: 10000, infected_population: 1, neighbours: [{ "name" => 'Westminster', "percentage_infected" => 3 },{ "name" => 'Islington', "percentage_infected" => 3 }, { "name" => 'City of London', "percentage_infected" => 3 }]),
-    Borough.new(name: "Westminster", population: 478435, infected_population: 0, neighbours: [{ "name" => 'Camden', "percentage_infected" => 3 },{ "name" => 'City of London', "percentage_infected" => 3 }]),
-    Borough.new(name: "Hackney", population: 47784, infected_population: 0, neighbours: [{ "name" => 'Islington', },{ "name" => 'Islington', "percentage_infected" => 3 }]),
-    Borough.new(name: "Southwark", population: 23269, infected_population: 0, neighbours: []),
-    Borough.new(name: "Islington", population: 323124, infected_population: 0, neighbours: []),
-    Borough.new(name: "City of London", population: 50, infected_population: 45, neighbours: [])
+    Borough.new(name: "Camden", population: 10000, infected_population: 1, neighbours: ['Westminster', 'Islington', 'City of London']),
+    Borough.new(name: "Westminster", population: 478435, infected_population: 0, neighbours: ['Camden', 'City of London']),
+    Borough.new(name: "Hackney", population: 47784, infected_population: 0, neighbours: ['Islington', 'City of London']),
+    Borough.new(name: "Southwark", population: 23269, infected_population: 0, neighbours: ['City of London']),
+    Borough.new(name: "Islington", population: 323124, infected_population: 0, neighbours: ['City of London', 'Camden', 'Hackney']),
+    Borough.new(name: "City of London", population: 50, infected_population: 45, neighbours: ['Islington', 'Southwark', 'Hackney', 'Camden', 'Westminster'])
 ]
 # Subscribe example
 MQTT::Client.connect(MQTT_HOST) do |c|
