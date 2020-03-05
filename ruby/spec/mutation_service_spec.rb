@@ -18,5 +18,11 @@ describe "Mutation Algorithm" do
       expect(infection_rate_algorithm(1, Date.new(2020, 3, 7))).to eq(1)
     end
   end
+
+  context "infection rate is 100" do
+    it "does not increment the infection rate" do
+      expect(infection_rate_algorithm(100, Date.new(2020, 3, 6))).to eq(100)
+    end
+  end
 end
 
