@@ -6,7 +6,7 @@
 
 ## Run tests
 
-> $ TODO
+> $ ruby test_my_service.rb
 
 ## Run the service
 
