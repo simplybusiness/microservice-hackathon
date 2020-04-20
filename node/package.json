@@ -4,12 +4,11 @@
   "description": "Boilerplate code for the microservice hackathon",
   "main": "my_service.js",
   "dependencies": {
-    "mqtt": "3.x"
+    "aws-iot-device-sdk": "2.x",
   },
   "devDependencies": {},
   "scripts": {
     "start": "node my_service.js",
-    "test": "mocha"
   },
   "repository": {
     "type": "git",

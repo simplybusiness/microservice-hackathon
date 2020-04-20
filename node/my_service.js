@@ -1,20 +1,42 @@
-const mqtt = require('mqtt')
+// An example MQTT service that publishes and subscribes
+// Uses the AWS IoT messaging service
+// Libraries
+var aws_iot = require('aws-iot-device-sdk')
 
-const MQTT_HOST = process.env.MQTT_HOST || 'test.mosquitto.org'
+// Constants
+const EVERY_THREE_SECONDS = 3000
+
+// Configuration
 const service_name = 'kittens'
-var client  = mqtt.connect(`mqtt://${MQTT_HOST}`)
+const aws_iot_config = {
+  keyPath: "../certs/private.pem.key",
+  certPath: "../certs/certificate.pem.crt",
+  caPath: "../certs/root-CA.pem",
+  clientId: service_name,
+  host: "a267zn9knxsui0-ats.iot.eu-west-1.amazonaws.com",
+  debug: false
+}
+const client = aws_iot.device(aws_iot_config)
 
-client.on('connect', function () {
+// Helpers
+const get_time = () => parseInt((new Date().getTime() / 1000).toFixed(0))
+
+// Main
+client.on('connect', () => {
   // The '#' wildcard matches all topics below this one
   client.subscribe('uservicehack/+', function (err) {
     if (!err) {
       client.publish('uservicehack/kittens', `Service: ${service_name} has connected!`)
     }
   })
+  setInterval(() => {
+    client.publish('uservicehack/kittens',
+                   `At the third stroke, the time will be: ${get_time()}`)
+  }, EVERY_THREE_SECONDS)
 })
 
-client.on('message', function (topic, message) {
+client.on('message', (topic, message) => {
   // message is of type Buffer, so we need to use .toString
   console.log(`Message on topic: ${topic} is: ${message.toString()}`)
-  client.end() // Remove this to loop forever
+  // client.end() // comment this to loop forever
 })
