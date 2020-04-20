@@ -27,6 +27,7 @@ client.on('connect', () => {
   client.subscribe('uservicehack/+', function (err) {
     if (!err) {
       client.publish('uservicehack/kittens', `Service: ${service_name} has connected!`)
+      console.log('Press Control-C to quit.')
     }
   })
   setInterval(() => {
