@@ -1,37 +1,28 @@
 #!/usr/bin/python3 -u
-import os
-import paho.mqtt.client as mqtt
-import paho.mqtt.publish as publish
+import time
+from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 
-MQTT_HOST=os.getenv("MQTT_HOST", "test.mosquitto.org").strip()
-print("Will connect to "+str(MQTT_HOST))
+# For certificate based connection
+myMQTTClient = AWSIoTMQTTClient("python_kittens")
 
-# The callback for when the client receives a CONNACK response from the server.
-def on_connect(client, userdata, flags, rc):
-    print("Connected with result code "+str(rc))
+# Configurations
+# For TLS mutual authentication
+keyPath = "../certs/private.pem.key"
+certPath = "../certs/certificate.pem.crt"
+caPath = "../certs/root-CA.pem"
+myMQTTClient.configureEndpoint("a267zn9knxsui0-ats.iot.eu-west-1.amazonaws.com", 8883)
+myMQTTClient.configureCredentials(caPath, keyPath, certPath)
 
-    # Subscribing in on_connect() means that if we lose the connection and
-    # reconnect then subscriptions will be renewed.
-    client.subscribe("uservicehack/#") # the '#' wildcard matches all topics below this one
+def message_logger(client, userdata, msg):
+    print("on topic: " + msg.topic + ", message: " + msg.payload.decode("ascii"))
 
-# The callback for when a PUBLISH message is received from the server.
-def on_message(client, userdata, msg):
-    print(msg.topic + " " + msg.payload.decode("ascii"))
+myMQTTClient.connect()
+myMQTTClient.subscribe("uservicehack/+", 1, message_logger)
 
-client = mqtt.Client()
-client.on_connect = on_connect
-client.on_message = on_message
-
-client.connect(MQTT_HOST, 1883, 60)
-client.loop_start()
-
-# Publish a single message on the topic
-publish.single("uservicehack/kittens", "minikatz are great!", hostname=MQTT_HOST)
-
-# Blocking call that processes network traffic, dispatches callbacks and
-# handles reconnecting.
-# Other loop*() functions are available that give a threaded interface and a
-# manual interface.
 while True:
-    1
-client.loop_stop() # Never gets here
+    message = "python says the time is " + str(int(time.time()))
+    myMQTTClient.publish("uservicehack/kittens", message, 0)
+    time.sleep(3)
+    
+myMQTTClient.unsubscribe("uservicehack/+")
+myMQTTClient.disconnect()
