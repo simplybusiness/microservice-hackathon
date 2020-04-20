@@ -1,4 +1,4 @@
-# Node exanple code
+# Node example code
 
 ## Install dependencies
 
