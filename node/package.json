@@ -5,10 +5,12 @@
   "main": "my_service.js",
   "dependencies": {
     "aws-iot-device-sdk": "2.x",
+    "jasmine": "3.x"
   },
   "devDependencies": {},
   "scripts": {
     "start": "node my_service.js",
+    "test": "jasmine test.js"
   },
   "repository": {
     "type": "git",
