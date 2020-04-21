@@ -12,3 +12,6 @@
 
 > $ python3 my_service.py
 
+## Run the monitor
+
+> $ python3 monitor.py
