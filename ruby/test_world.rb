@@ -1,5 +1,5 @@
+require_relative 'world'
 require 'minitest/autorun'
-require 'aws_iot_device'
 
 def create_event(topic:, payload:)
   @client.publish(topic, payload)
@@ -9,7 +9,7 @@ def event_published(topic:)
   @events.any? { |event| event.topic == topic }
 end
 
-describe "the world" do
+describe World do
   def setup
     super
     host = "a267zn9knxsui0-ats.iot.eu-west-1.amazonaws.com"
@@ -24,13 +24,17 @@ describe "the world" do
     callback = Proc.new do |message|
       @events.append(message)
     end
-    @client.subscribe("workshop/+", 0, callback)
+    @client.subscribe("workshop/#", 0, callback)
+  end
+
+  def wait_for_events
+    sleep 1
   end
 
   describe "when time starts" do
     it "starts the world" do
-      create_event(topic: "workshop/time/tick", payload: {"hours_elapsed" => 0})
-
+      World.create
+      wait_for_events
       assert event_published(topic: "workshop/environment/big_bang"), "Cannot find big bang event"
     end
   end

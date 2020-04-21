@@ -1,12 +1,19 @@
-#require 'minitest/autorun'
 require 'aws_iot_device'
 
-def event_published(topic:)
-  (@events || []).any? { |event| event.topic == topic }
-end
-
 class World
+  def self.run
+    create
+    loop do
+      # loop here
+    end
+  end
+
   def self.create
+    client = setup_event_publisher
+    client.publish('workshop/environment/big_bang', '')
+  end
+
+  def self.setup_event_publisher
     host = "a267zn9knxsui0-ats.iot.eu-west-1.amazonaws.com"
     port = 8883
     certificate_path = "../certs/certificate.pem.crt"
@@ -15,12 +22,6 @@ class World
     client = AwsIotDevice::MqttShadowClient::MqttManager.new(host: host, port: port, ssl: true)
     client.config_ssl_context(root_ca_path, private_key_path, certificate_path)
     client.connect
-    loop do
-    client.publish('workshop/big_bang', 'hello from big bang')
-    sleep 3
-    end
+    client
   end
 end
-
-World.create
-
