@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Pet
   attr_accessor :happiness, :energy, :sleeping
   attr_reader :name
@@ -11,15 +13,23 @@ class Pet
 
   def to_h
     {
-        "pet_name": name,
-        "sleeping": sleeping,
-        "energy": energy,
-        "happiness": happiness
+      "pet_name": name,
+      "sleeping": sleeping,
+      "energy": energy,
+      "happiness": happiness
     }
   end
 
   def get_tired
     @happiness -= 10
     @energy -= 10
+  end
+
+  def sleep
+    @sleeping = true
+  end
+
+  def wake_up
+    @sleeping = false
   end
 end
