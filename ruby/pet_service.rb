@@ -65,6 +65,16 @@ client.subscribe('workshop/player/pet_entertained', 0, proc do |_message|
   client.publish('workshop/pet/pet_updated', wrap_payload(pet))
 end)
 
+
+client.subscribe('workshop/pet/pet_updated', 0, proc do |_message|
+  pet_name = JSON.parse(message.payload)['pet_name']
+  pet = PetShelter.get(pet_name)
+  if !pet.alive?
+    client.publish('workshop/pet/pet_died', wrap_payload({pet_name: pet.name}))
+    PetShelter.bury(pet_name)
+  end
+end)
+
 # Loop forever publishing a new message to topic every three seconds
 loop do
   # client.publish(topic, "Hello from pet service where time is now #{Time.now.to_i}")

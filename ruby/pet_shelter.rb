@@ -18,4 +18,12 @@ class PetShelter
     pet = Pet.new(name)
     @@pets[pet.name] = pet
   end
+
+  def self.bury(name)
+    @@pets.delete(name)
+  end
+
+  def self.clear
+    @@pets = {}
+  end
 end
