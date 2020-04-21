@@ -8,4 +8,13 @@ class Pet
     @energy = 50
     @sleeping = false
   end
+
+  def to_h
+    {
+        "pet_name": name,
+        "sleeping": sleeping,
+        "energy": energy,
+        "happiness": happiness
+    }
+  end
 end

@@ -1,5 +1,8 @@
 # Imports
 require 'aws_iot_device'
+require 'pry'
+require_relative 'pet_shelter'
+require_relative 'pet'
 
 # Configuration
 host = "a267zn9knxsui0-ats.iot.eu-west-1.amazonaws.com"
@@ -15,22 +18,21 @@ client = AwsIotDevice::MqttShadowClient::MqttManager.new(host: host, port: port,
 client.config_ssl_context(root_ca_path, private_key_path, certificate_path)
 client.connect
 
-# Helpers
-callback = Proc.new do |message|
-  puts "On topic: #{message.topic}, message: #{message.payload}"
+def wrap_payload(payload)
+  payload.to_h.merge(service_name: "pet").to_json
 end
 
-# Main
-#
-# Register a callback message logger on our topic
-client.subscribe("workshop/+", 0, callback)
-
-client.subscribe("workshop/player/pet_adoption_requested", 0, Proc.new { |message| PetShelter.adopt(message.payload['pet_name']) })
+client.subscribe("workshop/player/pet_adoption_requested", 0, Proc.new { |message|
+  pet_name = JSON.parse(message.payload)['pet_name']
+  pet = PetShelter.adopt(pet_name)
+  client.publish("workshop/pet/pet_adopted", wrap_payload(pet))
+})
 
 # Loop forever publishing a new message to topic every three seconds
 loop do
-  client.publish(topic, "Hello from pet service where time is now #{Time.now.to_i}")
-  sleep 3
+  # client.publish(topic, "Hello from pet service where time is now #{Time.now.to_i}")
+  client.publish("workshop/player/pet_adoption_requested", { pet_name: "Bob" }.to_json)
+  sleep 10
 end
 
 # Use 'client.disconnect' if you don't want to loop forever

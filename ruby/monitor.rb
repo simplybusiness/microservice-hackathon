@@ -26,6 +26,8 @@ client.subscribe("workshop/#", 0, callback)
 
 # Loop forever publishing a new message to topic every three seconds
 loop do
+  client.publish("workshop/player/pet_adoption_requested", { pet_name: "Bob" }.to_json)
+  sleep 5
 end
 
 # Use 'client.disconnect' if you don't want to loop forever
