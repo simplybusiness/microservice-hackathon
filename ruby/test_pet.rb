@@ -51,6 +51,20 @@ describe 'Pet' do
     assert_equal pet.energy, 60
   end
 
+  it 'does not get more than 100 energy' do
+    pet = Pet.new('Toto')
+    pet.energy = 100
+    pet.fed
+    assert_equal pet.energy, 100
+  end
+
+  it 'does not get more than 100 happiness' do
+    pet = Pet.new('Toto')
+    pet.happiness = 100
+    pet.entertained
+    assert_equal pet.happiness, 100
+  end
+
   it 'increases happiness when entertained' do
     pet = Pet.new('Toto')
     assert_equal pet.happiness, 50

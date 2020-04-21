@@ -51,14 +51,14 @@ client.subscribe('workshop/environment/sun_set', 0, proc do |_message|
   end
 end)
 
-client.subscribe('workshop/player/pet_fed', 0, proc do |_message|
+client.subscribe('workshop/player/pet_fed', 0, proc do |message|
   pet_name = JSON.parse(message.payload)['pet_name']
   pet = PetShelter.get(pet_name)
   pet.fed
   client.publish('workshop/pet/pet_updated', wrap_payload(pet))
 end)
 
-client.subscribe('workshop/player/pet_entertained', 0, proc do |_message|
+client.subscribe('workshop/player/pet_entertained', 0, proc do |message|
   pet_name = JSON.parse(message.payload)['pet_name']
   pet = PetShelter.get(pet_name)
   pet.entertained
@@ -66,7 +66,7 @@ client.subscribe('workshop/player/pet_entertained', 0, proc do |_message|
 end)
 
 
-client.subscribe('workshop/pet/pet_updated', 0, proc do |_message|
+client.subscribe('workshop/pet/pet_updated', 0, proc do |message|
   pet_name = JSON.parse(message.payload)['pet_name']
   pet = PetShelter.get(pet_name)
   if !pet.alive?
@@ -79,11 +79,10 @@ client.subscribe('workshop/time/reset', 0, proc do |_message|
   PetShelter.clear
 end)
 
-# Loop forever publishing a new message to topic every three seconds
+# client.subscribe("workshop/#", 0, proc {|msg| puts "\nRECEIVED: #{msg}\n" })
+
 loop do
-  # client.publish(topic, "Hello from pet service where time is now #{Time.now.to_i}")
-  client.publish('workshop/player/pet_adoption_requested', { pet_name: 'Bob' }.to_json)
-  sleep 10
+  sleep 5
 end
 
 # Use 'client.disconnect' if you don't want to loop forever

@@ -21,8 +21,8 @@ class Pet
   end
 
   def get_tired
-    @happiness -= 10
-    @energy -= 10
+    update_hapiness(-10)
+    update_energy(-10)
   end
 
   def sleep
@@ -34,14 +34,24 @@ class Pet
   end
 
   def fed
-    @energy += 10
+    update_energy(10)
   end
 
   def entertained
-    @happiness += 10
+    update_hapiness(10)
   end
 
   def alive?
     @happiness > 0 && @energy > 0
+  end
+
+  private
+
+  def update_hapiness(amount)
+    @happiness = [ @happiness + amount , 100].min
+  end
+
+  def update_energy(amount)
+    @energy = [ @energy + amount , 100].min
   end
 end
