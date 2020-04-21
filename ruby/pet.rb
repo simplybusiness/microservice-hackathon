@@ -32,4 +32,12 @@ class Pet
   def wake_up
     @sleeping = false
   end
+
+  def fed
+    @energy += 10
+  end
+
+  def entertained
+    @happiness += 10
+  end
 end
