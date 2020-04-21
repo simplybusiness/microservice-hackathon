@@ -16,14 +16,18 @@ def increase_hour(current_hour):
     """
     return current_hour + 1
 
+
 def get_message(current_hour):
     """Receive a Python dict and return a valid JSON string with key hours_elapsed
     >>> get_message(3)
-    '{"message_type": "tick", "message": {"hours_elapsed": 3}}'
+    '{"publisher": "time", "topic": "workshop/time/tick", "payload": {"hours_elapsed": 3}}'
     """
 
-    message = json.dumps({"message_type" : "tick", "message" : {"hours_elapsed": current_hour}})
+    message = json.dumps(
+        {"publisher": "time", "topic": "workshop/time/tick", "payload": {"hours_elapsed": current_hour}}
+    )
     return message
+
 
 def connect_and_publish():
     current_hour = 0
