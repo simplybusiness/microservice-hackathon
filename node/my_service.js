@@ -7,7 +7,7 @@ var aws_iot = require('aws-iot-device-sdk')
 const EVERY_THREE_SECONDS = 3000
 
 // Configuration
-const service_name = 'kittens'
+const service_name = 'node_kittens'
 const aws_iot_config = {
   keyPath: "../certs/private.pem.key",
   certPath: "../certs/certificate.pem.crt",
@@ -24,14 +24,14 @@ const get_time = () => parseInt((new Date().getTime() / 1000).toFixed(0))
 // Main
 client.on('connect', () => {
   // The '#' wildcard matches all topics below this one
-  client.subscribe('uservicehack/+', function (err) {
+  client.subscribe('workshop/#', function (err) {
     if (!err) {
-      client.publish('uservicehack/kittens', `Service: ${service_name} has connected!`)
+      client.publish('workshop/kittens', `Service: ${service_name} has connected!`)
       console.log('Press Control-C to quit.')
     }
   })
   setInterval(() => {
-    client.publish('uservicehack/kittens',
+    client.publish('workshop/kittens',
                    `At the third stroke, the time will be: ${get_time()}`)
   }, EVERY_THREE_SECONDS)
 })

@@ -7,7 +7,7 @@ port = 8883
 certificate_path = "../certs/certificate.pem.crt"
 private_key_path = "../certs/private.pem.key"
 root_ca_path = "../certs/root-CA.pem"
-topic = "uservicehack/kittens"
+topic = "workshop/kittens"
 service_name = 'ruby_kittens'
 
 # MQTT client
@@ -23,7 +23,7 @@ end
 # Main
 #
 # Register a callback message logger on our topic 
-client.subscribe("uservicehack/+", 0, callback)
+client.subscribe("workshop/#", 0, callback)
 
 # Loop forever publishing a new message to topic every three seconds
 loop do

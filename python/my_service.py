@@ -17,12 +17,12 @@ def message_logger(client, userdata, msg):
     print("on topic: " + msg.topic + ", message: " + msg.payload.decode("ascii"))
 
 myMQTTClient.connect()
-myMQTTClient.subscribe("uservicehack/+", 1, message_logger)
+myMQTTClient.subscribe("workshop/#", 1, message_logger)
 
 while True:
     message = "python says the time is " + str(int(time.time()))
-    myMQTTClient.publish("uservicehack/kittens", message, 0)
+    myMQTTClient.publish("workshop/kittens", message, 0)
     time.sleep(3)
     
-myMQTTClient.unsubscribe("uservicehack/+")
+myMQTTClient.unsubscribe("workshop/#")
 myMQTTClient.disconnect()
