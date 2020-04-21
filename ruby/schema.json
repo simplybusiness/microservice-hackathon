@@ -1,0 +1,35 @@
+[
+  {
+      "message type": "pet_born",
+      "publisher": "pet",
+      "consumers": [ "player" ],
+      "channel": "workshop/pet",
+      "example_message": {
+          "pet_name": "Coco",
+          "sleeping": false,
+          "energy": 50,
+          "happiness": 50
+      }
+  },
+  {
+    "message type": "pet_updated",
+    "publisher": "pet",
+    "consumers": [ "player" ],
+    "channel": "workshop/pet",
+    "example_message": {
+      "pet_name": "Coco",
+      "sleeping": false,
+      "energy": 50,
+      "happiness": 50
+    }
+  },
+  {
+    "message type": "pet_died",
+    "publisher": "pet",
+    "consumers": [ "player" ],
+    "channel": "workshop/pet",
+    "example_message": {
+      "pet_name": "Coco"
+    }
+  }
+]
