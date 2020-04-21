@@ -20,24 +20,12 @@ callback = Proc.new do |message|
   puts "On topic: #{message.topic}, message: #{message.payload}"
 end
 
-player_callback = Proc.new do |message|
-  case message.payload['message type']
-  when 'pet_adoption_requested'
-    # do something
-  when 'pet_entertained'
-    # do something
-  when 'pet_fed'
-    # do something
-  end
-end
-
 # Main
 #
 # Register a callback message logger on our topic
 client.subscribe("workshop/+", 0, callback)
 
-client.subscribe("workshop/player", 0, player_callback)
-
+client.subscribe("workshop/player/pet_adoption_requested", 0, Proc.new { |message| PetShelter.adopt(message.payload['pet_name']) })
 
 # Loop forever publishing a new message to topic every three seconds
 loop do
