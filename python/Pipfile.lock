@@ -1,0 +1,28 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "4d2e54a397ca13b3471a0cd1ca06c876af0cb3c786ac5af754f88878d5ea4af9"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "python_version": "3.7"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "awsiotpythonsdk": {
+            "hashes": [
+                "sha256:bcd68cb7fdb044dbd5e5d3a02c311b25717c0376168e7c992982130f19c51b03"
+            ],
+            "index": "pypi",
+            "version": "==1.4.8"
+        }
+    },
+    "develop": {}
+}
