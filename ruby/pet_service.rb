@@ -75,6 +75,10 @@ client.subscribe('workshop/pet/pet_updated', 0, proc do |_message|
   end
 end)
 
+client.subscribe('workshop/time/reset', 0, proc do |_message|
+  PetShelter.clear
+end)
+
 # Loop forever publishing a new message to topic every three seconds
 loop do
   # client.publish(topic, "Hello from pet service where time is now #{Time.now.to_i}")
