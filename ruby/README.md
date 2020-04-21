@@ -12,3 +12,6 @@
 
 > $ ruby my_service.rb
 
+## Run the monitor
+
+> $ ruby monitor.rb
