@@ -6,9 +6,9 @@
 
 ## Run tests
 
-> $ ruby test_my_service.rb
+> $ bundle exec ruby test_my_service.rb
 
 ## Run the service
 
-> $ ruby my_service.rb
+> $ bundle exec ruby my_service.rb
 
