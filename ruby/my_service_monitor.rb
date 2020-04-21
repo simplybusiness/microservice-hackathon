@@ -28,7 +28,7 @@ client.subscribe("workshop/#", 0, callback)
 # Loop forever publishing a new message to topic every three seconds
 loop do
   # client.publish(topic, "time in rubyland is now #{Time.now.to_i}")
-  # sleep 3
+  sleep 3
 end
 
 # Use 'client.disconnect' if you don't want to loop forever
