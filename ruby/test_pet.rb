@@ -57,4 +57,18 @@ describe 'Pet' do
     pet.entertained
     assert_equal pet.happiness, 60
   end
+
+  it 'dies when happiness is 0' do
+    pet = Pet.new('Toto')
+    assert pet.alive?
+    pet.happiness = 0
+    assert !pet.alive?
+  end
+
+  it 'dies when energy is 0' do
+    pet = Pet.new('Toto')
+    assert pet.alive?
+    pet.energy = 0
+    assert !pet.alive?
+  end
 end

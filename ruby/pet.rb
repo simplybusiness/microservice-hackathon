@@ -40,4 +40,8 @@ class Pet
   def entertained
     @happiness += 10
   end
+
+  def alive?
+    @happiness > 0 && @energy > 0
+  end
 end
