@@ -28,6 +28,13 @@ client.subscribe("workshop/player/pet_adoption_requested", 0, Proc.new { |messag
   client.publish("workshop/pet/pet_adopted", wrap_payload(pet))
 })
 
+client.subscribe("workshop/time/tick", 0, Proc.new { |message|
+  PetShelter.all.each do |pet|
+    pet.get_tired
+    client.publish("workshop/pet/pet_updated", wrap_payload(pet))
+  end
+})
+
 # Loop forever publishing a new message to topic every three seconds
 loop do
   # client.publish(topic, "Hello from pet service where time is now #{Time.now.to_i}")

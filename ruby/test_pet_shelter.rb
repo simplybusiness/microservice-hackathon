@@ -9,6 +9,12 @@ describe "Pet Shelter" do
     assert_equal PetShelter.count, 1
   end
 
+  it "lists all adopted pets" do
+    toto = PetShelter.adopt("Toto")
+    ruffus = PetShelter.adopt("Ruffus")
+    assert_equal PetShelter.all, [toto, ruffus]
+  end
+
   it "gets the adopted pet" do
     PetShelter.adopt("Toto")
     assert PetShelter.get("Toto")

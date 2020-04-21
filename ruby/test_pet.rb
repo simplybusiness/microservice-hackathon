@@ -23,4 +23,13 @@ describe "Pet" do
       }
     )
   end
+
+  it 'updates its attributes with the pass of time' do
+    pet = Pet.new("Toto")
+    assert_equal pet.energy, 50
+    assert_equal pet.happiness, 50
+    pet.get_tired
+    assert_equal pet.energy, 40
+    assert_equal pet.happiness, 40
+  end
 end

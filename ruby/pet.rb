@@ -17,4 +17,9 @@ class Pet
         "happiness": happiness
     }
   end
+
+  def get_tired
+    @happiness -= 10
+    @energy -= 10
+  end
 end

@@ -6,6 +6,10 @@ class PetShelter
     @@pets[name]
   end
 
+  def self.all
+    @@pets.values
+  end
+
   def self.count
     @@pets.size
   end
