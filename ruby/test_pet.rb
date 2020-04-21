@@ -4,7 +4,7 @@ require_relative 'pet'
 
 describe "Pet" do
   it "creates a new Pet" do
-    pet = Pet.new
+    pet = Pet.new("Toto")
     assert_equal pet.happiness, 50
     assert_equal pet.energy, 50
     assert_equal pet.sleeping, false
