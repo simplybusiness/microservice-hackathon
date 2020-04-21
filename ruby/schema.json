@@ -1,4 +1,40 @@
-[
+[{ "message type": "tick",
+   "publisher":    "time",
+   "consumers":    ["environment", “pet”]
+   "channel":      "workshop/time",
+   "example_message": { "hours_elapsed": 3 }
+ },
+{ "message type": "sun_rose",
+   "publisher":    "environment",
+   "consumers":    [ ]
+   "channel":      "workshop/environment",
+   "example_message": { “service_name”: “environment” }
+ },
+{ "message type": "sun_set",
+   "publisher":    "environment",
+   "consumers":    [ ]
+   "channel":      "workshop/environment",
+   "example_message": { “service_name”: “environment” }
+ },
+{ "message type": "weather_changed",
+   "publisher":    "environment",
+   "consumers":    [ ]
+   "channel":      "workshop/environment",
+   "example_message": { 
+       “service_name”: “environment”
+        "temperature": 22, // Degrees celsius
+ },
+{ "message type": "big_bang",
+   "publisher":    "environment",
+   "consumers":    [ ]
+   "channel":      "workshop/environment",
+   "example_message": { 
+       “service_name”: “environment”
+        "temperature": 22, // Degrees celsius
+       “day_or_night”: “day”
+ },
+
+
   {
       "message type": "pet_born",
       "publisher": "pet",
@@ -29,7 +65,27 @@
     "consumers": [ "player" ],
     "channel": "workshop/pet",
     "example_message": {
-      "pet_name": "Coco"
+        "pet_name": "Coco"
     }
-  }
-]
+  },
+
+
+ { "message type": "pet_fed",
+   "publisher":    "player",
+   "consumers":    [ “pet” ]
+   "channel":      "workshop/player",
+   "example_message": { “pet_name”: “Coco” }
+ },
+ { "message type": "pet_entertained",
+   "publisher":    "player",
+   "consumers":    [ “pet” ]
+   "channel":      "workshop/player",
+   "example_message": { “pet_name”: “Coco” }
+ },
+{ "message type": "pet_adoption_requested",
+   "publisher":    "player",
+   "consumers":    [ “pet” ]
+   "channel":      "workshop/player",
+   "example_message": { “pet_name”: “Coco Jr” }
+ },
+
