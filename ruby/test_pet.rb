@@ -43,4 +43,18 @@ describe 'Pet' do
     pet.wake_up
     assert !pet.sleeping
   end
+
+  it 'increases energy when fed' do
+    pet = Pet.new('Toto')
+    assert_equal pet.energy, 50
+    pet.fed
+    assert_equal pet.energy, 60
+  end
+
+  it 'increases happiness when entertained' do
+    pet = Pet.new('Toto')
+    assert_equal pet.happiness, 50
+    pet.entertained
+    assert_equal pet.happiness, 60
+  end
 end
