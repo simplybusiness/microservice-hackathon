@@ -7,8 +7,7 @@ port = 8883
 certificate_path = "../certs/certificate.pem.crt"
 private_key_path = "../certs/private.pem.key"
 root_ca_path = "../certs/root-CA.pem"
-topic = "workshop/kittens"
-service_name = 'ruby_kittens'
+service_name = 'pet-monitor'
 
 # MQTT client
 client = AwsIotDevice::MqttShadowClient::MqttManager.new(host: host, port: port, ssl: true)
@@ -22,13 +21,11 @@ end
 
 # Main
 #
-# Register a callback message logger on our topic 
-client.subscribe("workshop/+", 0, callback)
+# Register a callback message logger on our topic
+client.subscribe("workshop/#", 0, callback)
 
 # Loop forever publishing a new message to topic every three seconds
 loop do
-  client.publish(topic, "time in rubyland is now #{Time.now.to_i}")
-  sleep 3
 end
 
 # Use 'client.disconnect' if you don't want to loop forever
