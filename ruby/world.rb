@@ -9,11 +9,11 @@ class World
   end
 
   def self.create
-    client = setup_event_publisher
+    client = setup_event_client
     client.publish('workshop/environment/big_bang', '')
   end
 
-  def self.setup_event_publisher
+  def self.setup_event_client
     host = "a267zn9knxsui0-ats.iot.eu-west-1.amazonaws.com"
     port = 8883
     certificate_path = "../certs/certificate.pem.crt"
