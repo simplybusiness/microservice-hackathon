@@ -11,3 +11,7 @@
 ## Start the service
 
 > $ npm start
+
+## Start the channel monitor
+
+> $ npm run monitor

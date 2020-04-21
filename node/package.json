@@ -10,7 +10,8 @@
   "devDependencies": {},
   "scripts": {
     "start": "node my_service.js",
-    "test": "jasmine test.js"
+    "test": "jasmine test.js",
+    "monitor": "node monitor.js"
   },
   "repository": {
     "type": "git",
